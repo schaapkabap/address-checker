@@ -2,7 +2,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://example.com
+ * @link       http://cherement.nl
  * @since      1.0.0
  *
  * @package    Address-checker
@@ -16,7 +16,7 @@
  * @since      1.0.0
  * @package    Address-Checker
  * @subpackage Address-Checker/includes
- * @author     Your Name <email@example.com>
+ * @author     Alexander van Dam <info@cherement.nl>
  */
 class AddressCheckerActivator {
     /**

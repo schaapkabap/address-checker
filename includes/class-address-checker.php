@@ -23,7 +23,7 @@
  * @since      1.0.0
  * @package    Address-Checker
  * @subpackage Address-Checker/includes
- * @author     Your Name <email@example.com>
+ * @author     Alexander van Dam <info@cherement.nl>
  */
 class AddressChecker {
     /**
@@ -32,7 +32,7 @@ class AddressChecker {
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Plugin_Name_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      Address-Checker_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
     /**
@@ -72,6 +72,8 @@ class AddressChecker {
 
 
 
+
+
     }
     /**
      * Load the required dependencies for this plugin.
@@ -103,7 +105,7 @@ class AddressChecker {
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-adress-checker-admin.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-address-checker-admin.php';
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
@@ -123,7 +125,7 @@ class AddressChecker {
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
+     * Uses the Adress-Checker_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -145,6 +147,8 @@ class AddressChecker {
         $plugin_settings_tab = AdressCheckerWC_Settings_Tab_code::init();
 
     }
+
+
     /**
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
@@ -191,7 +195,7 @@ class AddressChecker {
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    Plugin_Name_Loader    Orchestrates the hooks of the plugin.
+     * @return    Address-Checker_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader() {
         return $this->loader;

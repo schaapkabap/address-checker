@@ -2,22 +2,20 @@
 /**
  * The plugin bootstrap file
  *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
  *
- * @link              http://webroots.nl
+ * Address-Checker validate the addressfield of Woocommerce
+ *
+ * @link              http://cherement.nl/demo
  * @since             1.0.0
  * @package           adress-checker
  *
  * @wordpress-plugin
  * Plugin Name:       Address-Checker
- * Plugin URI:        http://webroots.nl
- * Description:       This is the description the plugin. Its checks the adresses
+ * Plugin URI:        http://cherement.nl/demo
+ * Description:       This plugin validates the addresses in Woocommerce with a Google API Key.
  * Version:           1.0.0
- * Author:            Webroots
- * Author URI:        http://example.com; http://webroots.nl/
+ * Author:            Alexander
+ * Author URI:        http://schaapkebap.nl
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       address-checker
@@ -52,6 +50,27 @@ register_deactivation_hook( __FILE__, 'deactivateAddressChecker' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-address-checker.php';
 
+
+/*
+ * Defines te links on the plugin page
+ */
+add_filter( 'plugin_action_links', 'ttt_wpmdr_add_action_plugin', 10, 5 );
+function ttt_wpmdr_add_action_plugin( $actions, $plugin_file )
+{
+    static $plugin;
+
+    if (!isset($plugin))
+        $plugin = plugin_basename(__FILE__);
+    if ($plugin == $plugin_file) {
+
+        $settings = array('settings' => '<a href="admin.php?page=wc-settings&tab=settings_tab_address_checker">' . __('Settings', 'General') . '</a>');
+        $actions = array_merge($settings, $actions);
+
+
+    }
+
+    return $actions;
+}
 /**
  * Begins execution of the plugin.
  *

@@ -2,7 +2,7 @@
 /**
  * Creates a settingstab in Woocommerce
  *
- * @link       http://example.com
+ * @link       http://cherement.nl
  * @since      1.0.0
  *
  * @package    Address-Checker
@@ -20,8 +20,8 @@ class AdressCheckerWC_Settings_Tab_code
     public static function init()
     {
         add_filter('woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50);
-        add_action('woocommerce_settings_tabs_settings_tab_demo', __CLASS__ . '::settings_tab');
-        add_action('woocommerce_update_options_settings_tab_demo', __CLASS__ . '::update_settings');
+        add_action('woocommerce_settings_tabs_settings_tab_address_checker', __CLASS__ . '::settings_tab');
+        add_action('woocommerce_update_options_settings_tab_address_checker', __CLASS__ . '::update_settings');
 
     }
 
@@ -33,7 +33,7 @@ class AdressCheckerWC_Settings_Tab_code
      */
     public static function add_settings_tab($settings_tabs)
     {
-        $settings_tabs['settings_tab_demo'] = __('Adress-checker', 'address-checker-tab');
+        $settings_tabs['settings_tab_address_checker'] = __('Address-checker', 'address-checker-tab');
         return $settings_tabs;
     }
 
@@ -70,13 +70,14 @@ class AdressCheckerWC_Settings_Tab_code
             'section_title' => array(
                 'name' => __('Google API Code', 'woocommerce-settings-code'),
                 'type' => 'title',
-                'desc' => 'Om de adresgegevens te controlleren maken wij gebruik van een Google API.<br>
-                                <a target="_blank" href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Hier</a> vind u uitleg om een Google API Code aan te vragen
-                                <br>Deze plugin heeft toegang nodig tot Google Maps Geocoding.',
+                'desc' => 'To check the address do we use a Google API.<br>
+                                <a target="_blank" href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Here</a> is an explanation to request a Google API Code
+
+                                <br>This plugin requires access to Google Maps Geocoding.',
                 'id' => 'wc_settings_tab_demo_section_title'
             ),
             'title' => array(
-                'name' => __('Google api code', 'woocommerce-settings-tab-code'),
+                'name' => __('Google Api code', 'woocommerce-settings-tab-code'),
                 'type' => 'text',
                 'css' => 'min-width:350px;',
                 'desc' => __('Voer hier u Google API code in', 'woocommerce-settings-tab-demo'),

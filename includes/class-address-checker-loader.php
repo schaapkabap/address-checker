@@ -19,7 +19,7 @@
  *
  * @package    Address-Checker
  * @subpackage Address-Checker/includes
- * @author     Your Name <email@example.com>
+ * @author     Alexander van Dam <info@cherement.nl>
  */
 class AddressChecker_Loader {
 
@@ -122,6 +122,7 @@ class AddressChecker_Loader {
 
         foreach ( $this->actions as $hook ) {
             add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+
         }
 
     }

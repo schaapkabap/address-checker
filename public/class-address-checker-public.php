@@ -3,11 +3,11 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       http://example.com
+ * @link       http://cherement.nl/demo
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/publi*/
+ * @package    Address-Checker
+ * @subpackage Address-Checker/publi*/
 
 /**
  * The public-facing functionality of the plugin.
@@ -17,7 +17,7 @@
  *
  * @package    Plugin_Name
  * @subpackage Plugin_Name/public
- * @author     Your Name <email@example.com>
+ * @author     Alexander van Dam <info@cherement.nl>
  */
 class AdressChecker_Public {
 
@@ -51,6 +51,7 @@ class AdressChecker_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+
 	}
 
 	/**
@@ -72,7 +73,7 @@ class AdressChecker_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/adress-checker-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/address-checker-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -95,7 +96,7 @@ class AdressChecker_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/adress-checker-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/address-checker-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

@@ -2,7 +2,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       http://example.com
+ * @link       http://cherement.nl
  * @since      1.0.0
  *
  * @package    Address-Checker
@@ -14,9 +14,9 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @package    Address-Checker
+ * @subpackage Address-Checker/includes
+ * @author     Alexander van Dam <info@cherement.nl>
  */
 class AddressCheckerDeactivator {
     /**
