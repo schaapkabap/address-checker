@@ -1,11 +1,11 @@
-=== Address Checker ===
-Contributors: schaapkabap
-Tags: Woocommerce, Addresses,The Netherlands,Checker
-Requires at least: 4.7
-Tested up to: 4.7.3
-Tested up to: 4.7,3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+#=== Address Checker ===
+####Contributors: schaapkabap
+####Tags: Woocommerce, Addresses,The Netherlands,Checker
+####Requires at least: 4.7
+####Tested up to: 4.7.3
+####Tested up to: 4.7,3
+####License: GPLv2 or later
+####License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 For Woocommerce to check the addresses in The Netherlands. After the checkout page validate the Address Checker the Address data. Only for in The Netherlands.
 

@@ -13,16 +13,39 @@ if (!defined('ABSPATH')) exit;
 
 class AdressCheckerWC_Settings_Tab_code
 {
+
+
+
+
     /**
      * Bootstraps the class and hooks required actions & filters.
      *
      */
     public static function init()
     {
-        add_filter('woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50);
-        add_action('woocommerce_settings_tabs_settings_tab_address_checker', __CLASS__ . '::settings_tab');
-        add_action('woocommerce_update_options_settings_tab_address_checker', __CLASS__ . '::update_settings');
 
+        add_action('woocommerce_settings_shipping', __CLASS__ . '::settings_tab');
+        add_action('woocommerce_settings_save_shipping', __CLASS__ . '::update_settings');
+        add_action( 'woocommerce_sections_shipping', __CLASS__ . '::add_sections'  );
+        self::add_invalid_notification();
+
+
+
+
+
+
+    }
+
+    /**
+     * Add a the notification if apikey is invalid
+     */
+    public static function add_invalid_notification(){
+
+if(!isset($_POST['address_checker_settings_api_code'])){
+    return;
+}
+        $key= $_POST['address_checker_settings_api_code'];
+        AddressCheckerNotification::api_notice($key);
     }
 
     /**
@@ -34,6 +57,7 @@ class AdressCheckerWC_Settings_Tab_code
     public static function add_settings_tab($settings_tabs)
     {
         $settings_tabs['settings_tab_address_checker'] = __('Address-checker', 'address-checker-tab');
+
         return $settings_tabs;
     }
 
@@ -45,7 +69,23 @@ class AdressCheckerWC_Settings_Tab_code
      */
     public static function settings_tab()
     {
-        woocommerce_admin_fields(self::get_settings());
+
+        global $current_section;
+        woocommerce_admin_fields(self::get_settings($current_section));
+
+
+    }
+
+    public static function add_sections(){
+
+        add_filter( 'woocommerce_get_sections_shipping', 'address_checker_add_section' );
+        function address_checker_add_section( $sections ) {
+
+            $sections['address_checker'] = __( 'Address Checker', 'address_checker' );
+            return $sections;
+
+        }
+
     }
 
     /**
@@ -56,7 +96,11 @@ class AdressCheckerWC_Settings_Tab_code
      */
     public static function update_settings()
     {
-        woocommerce_update_options(self::get_settings());
+
+        global $current_section;
+        woocommerce_update_options(self::get_settings($current_section));
+        add_option('address_checker_settings_api_valid', 'false');
+
     }
 
     /**
@@ -64,31 +108,38 @@ class AdressCheckerWC_Settings_Tab_code
      *
      * @return array Array of settings for @see woocommerce_admin_fields() function.
      */
-    public static function get_settings()
+    public static function get_settings($current_section, $settings='')
     {
-        $settings = array(
-            'section_title' => array(
-                'name' => __('Google API Code', 'woocommerce-settings-code'),
-                'type' => 'title',
-                'desc' => 'To check the address do we use a Google API.<br>
+        if($current_section == 'address_checker') {
+            $settings = array(
+                'section_title' => array(
+                    'name' => __('Google maps API Code', 'woocommerce-settings-code'),
+                    'type' => 'title',
+                    'desc' => 'To check the address the plugin uses Google API.<br>
                                 <a target="_blank" href="https://developers.google.com/maps/documentation/geocoding/get-api-key">Here</a> is an explanation to request a Google API Code
 
                                 <br>This plugin requires access to Google Maps Geocoding.',
-                'id' => 'wc_settings_tab_demo_section_title'
-            ),
-            'title' => array(
-                'name' => __('Google Api code', 'woocommerce-settings-tab-code'),
-                'type' => 'text',
-                'css' => 'min-width:350px;',
-                'desc' => __('Voer hier u Google API code in', 'woocommerce-settings-tab-demo'),
-                'id' => 'wcp_settings_api_code'
-            ),
+                    'id' => 'wc_settings_tab_demo_section_title'
+                ),
+                'title' => array(
+                    'name' => __('Google Api code', 'woocommerce-settings-tab-code'),
+                    'type' => 'text',
+                    'css' => 'min-width:350px;',
+                    'desc' => __('Enter here your Google Api key', 'woocommerce-settings-tab-demo'),
+                    'id' => 'address_checker_settings_api_code'
+                ),
 
-            'section_end' => array(
-                'type' => 'sectionend',
-                'id' => 'wc_settings_tab_demo_section_end'
-            )
-        );
-        return apply_filters('wc_settings_tab_code_settings', $settings);
+                'section_end' => array(
+                    'type' => 'sectionend',
+                    'id' => 'wc_settings_tab_demo_section_end'
+                )
+            );
+            return apply_filters('woocommerce_get_settings_shipping', $settings, 'address_checker');
+        }
+        return null;
+
+
     }
+
+
 }

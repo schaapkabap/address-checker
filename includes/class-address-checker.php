@@ -67,7 +67,9 @@ class AddressChecker {
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
+        $this->set_notification();
         $this->set_settings_tab();
+
         $this->set_validate();
 
 
@@ -120,6 +122,11 @@ class AddressChecker {
          */
         require_once plugin_dir_path (dirname(__FILE__) ) . 'includes/class-address-checker-validate.php';
 
+        /**
+         * The Class for defining all notifications
+         */
+        require_once plugin_dir_path (dirname(__FILE__) ) . 'includes/class-address-checker-notification.php';
+
         $this->loader = new AddressChecker_Loader();
     }
     /**
@@ -137,16 +144,26 @@ class AddressChecker {
     }
 
     private function set_validate(){
-    $plugin_validate = new AdressChecker_validate();
+    $plugin_validate = new AddressChecker_validate();
 }
     /**
-     *
+     *  Defines the Woocommer_settings_tab
      */
     private function set_settings_tab(){
 
         $plugin_settings_tab = AdressCheckerWC_Settings_Tab_code::init();
 
     }
+
+    /**
+     * Defines all notifications for the plugin
+     */
+
+    private function set_notification(){
+
+        $notification = new AddressCheckerNotification();
+    }
+
 
 
     /**
@@ -160,6 +177,7 @@ class AddressChecker {
         $plugin_admin = new AddressChecker_Admin( $this->get_plugin_name(), $this->get_version() );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
     }
     /**
      * Register all of the hooks related to the public-facing functionality
@@ -209,4 +227,6 @@ class AddressChecker {
     public function get_version() {
         return $this->version;
     }
+
+
 }

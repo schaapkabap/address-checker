@@ -7,13 +7,13 @@ Tested up to: 4.7,3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-For Woocommerce to check the addresses in The Netherlands. After the checkout page validate the Address Checker the Address data. Only for in The Netherlands.
+For Woocommerce plug-in. To check the addresses in The Netherlands. After the checkout page validate the Address Checker the Addresses data. Only ussage for in The Netherlands.
 
 == Description ==
-Checks the address fields in woocommerce in the checkout. The validation before paying.
+Checks the address fields of Woocommerce by the checkout.
 
 
-Note. This tested and works only in The Netherlands. In the future their be more Country's working on this plugin
+Note. This has only been tested in the Netherlands. In the future their be more Country's working on this plugin
 
 == Installation ==
 1. Install Address Checker either via the WordPress.org plugin directory, or by uploading the files to your

@@ -52,6 +52,7 @@ class AddressChecker_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+
 	}
 
 	/**
@@ -73,7 +74,7 @@ class AddressChecker_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/plugin-name-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/address-checker-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +97,7 @@ class AddressChecker_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/address-checker-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 

@@ -9,19 +9,23 @@
  * @package    Address-Checker
  * @subpackage Address-Checker/includes
  */
+
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class AdressChecker_validate
+class AddressChecker_validate
 {
 
 
     /**
-     * AdressChecker_validate constructor.
+     * AddressChecker_validate constructor.
      */
     public function __construct()
     {
+        if(get_option('address_checker_settings_api_valid') == 'false'){
+            return;
+        }
 
         add_action('woocommerce_before_checkout_process', array($this, 'custom_validation_process'));
 
@@ -29,23 +33,7 @@ class AdressChecker_validate
 
 
     /**
-     * Screams in Wordpress the
-     */
-    public function api_code_maps()
-    {
-        ?>
-        <div class="error notice is-dismissible">
-
-        <p><strong><?php _e('Add your Google API code in Woocommerce!', 'adress-checker'); ?></strong></p>
-        <button type="button" class="notice-dismiss">
-            <span class="screen-reader-text">Dismiss this notice.</span>
-        </button>
-        </div><?php
-    }
-
-
-    /* *
-     *  Validate the adressfields of the billingadress and the shippingaddress
+     *  Validate the address fields of the billing address and the shipping address
      */
     public function custom_validation_process()
     {
@@ -88,7 +76,7 @@ class AdressChecker_validate
 
 
     /**
-     * Asked to Google the zipcode of the Address field
+     * Get the zipcode from of the Address field
      *
      * @param $straat
      * @param $number
@@ -152,7 +140,7 @@ class AdressChecker_validate
             $this->scream_wrong("This can only be used for The Netherlands");
         }
 
-        $api_code = get_option('AdressChecker_settings_api_code');
+        $api_code = get_option('address_checker_settings_api_code');
         $postcode = $postalcodeField = str_replace(' ', '', strtoupper($postalcodeField));
         $city = $cityField;
         $adress = $adresField;
@@ -176,7 +164,7 @@ class AdressChecker_validate
 
         }
         /*
-         * Get the zipcode of the adressfield
+         * Get the zipcode of the adressfield or scream something
          */
         elseif (preg_match('~\A[1-9]\d{3} ?[a-zA-Z]{2}\z~', $postalcodeField)) {
             $api_postcode = $this->getPostcode($address, $number, $city, $api_code);

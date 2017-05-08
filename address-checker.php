@@ -63,7 +63,7 @@ function ttt_wpmdr_add_action_plugin( $actions, $plugin_file )
         $plugin = plugin_basename(__FILE__);
     if ($plugin == $plugin_file) {
 
-        $settings = array('settings' => '<a href="admin.php?page=wc-settings&tab=settings_tab_address_checker">' . __('Settings', 'General') . '</a>');
+        $settings = array('settings' => '<a href="admin.php?page=wc-settings&tab=shipping&section=address_checker">' . __('Settings', 'General') . '</a>');
         $actions = array_merge($settings, $actions);
 
 
@@ -83,6 +83,7 @@ function ttt_wpmdr_add_action_plugin( $actions, $plugin_file )
 function run_AdressChecker() {
     $plugin = new AddressChecker();
     $plugin->run();
+
 }
 
 if (function_exists('run_AdressChecker')){
