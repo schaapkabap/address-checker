@@ -129,19 +129,7 @@ private function woocoomerce_available(){
     }
 
 
-    /**
-     * Check if WooCommerce is active
-     **/
-    elseif (!in_array(
-        'woocommerce/woocommerce.php',
-        apply_filters( 'active_plugins', get_option( 'active_plugins' ) )
-    )
-    ) {
-        $class = 'notice notice-error';
-        $message = __('Woocommerce is not active, This is required for the plugin Address-Checker', 'address-checker');
-
-        printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
-    }
+   
 
 
 }

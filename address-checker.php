@@ -14,7 +14,7 @@
  * Plugin URI:        http://cherement.nl/demo
  * Description:       This plugin validates the addresses in Woocommerce with a Google API Key.
  * Version:           1.0.0
- * Author:            Alexander
+ * Author:            schaapkabap
  * Author URI:        http://schaapkebap.nl
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -54,6 +54,27 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-address-checker.php';
 /*
  * Defines te links on the plugin page
  */
+
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_AdressChecker() {
+    $plugin = new AddressChecker();
+    $plugin->run();
+    
+}
+
+if (function_exists('run_AdressChecker')){
+
+   run_AdressChecker();
+}
 add_filter( 'plugin_action_links', 'ttt_wpmdr_add_action_plugin', 10, 5 );
 function ttt_wpmdr_add_action_plugin( $actions, $plugin_file )
 {
@@ -71,24 +92,5 @@ function ttt_wpmdr_add_action_plugin( $actions, $plugin_file )
 
     return $actions;
 }
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_AdressChecker() {
-    $plugin = new AddressChecker();
-    $plugin->run();
-
-}
-
-if (function_exists('run_AdressChecker')){
-    run_AdressChecker();
-}
-
 
 ?>

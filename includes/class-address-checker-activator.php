@@ -31,3 +31,4 @@ class AddressCheckerActivator {
     	return;
     }
 }
+?>
