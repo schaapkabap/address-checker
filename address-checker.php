@@ -6,14 +6,14 @@
  * Address-Checker validate the addressfield of Woocommerce
  *
  * @link              http://cherement.nl/demo
- * @since             1.0.0
+ * @since             1.0.1
  * @package           adress-checker
  *
  * @wordpress-plugin
  * Plugin Name:       Address-Checker
  * Plugin URI:        http://cherement.nl/demo
  * Description:       This plugin validates the addresses in Woocommerce with a Google API Key.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            schaapkabap
  * Author URI:        http://schaapkebap.nl
  * License:           GPL-2.0+
@@ -68,11 +68,11 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-address-checker.php';
 function run_AdressChecker() {
     $plugin = new AddressChecker();
     $plugin->run();
-    
+
 }
 
 if (function_exists('run_AdressChecker')){
-
+ 
    run_AdressChecker();
 }
 add_filter( 'plugin_action_links', 'ttt_wpmdr_add_action_plugin', 10, 5 );

@@ -26,6 +26,9 @@ Note. This has only been tested in the Netherlands. In the future their be more 
 
 
 == Changelog ==
+= 1.0.1 =
+* Fixed Curl and validation of variables
+
 = 1.0.0 =
 * Fixed issues by the activation of the plugin
 

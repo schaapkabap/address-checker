@@ -38,64 +38,22 @@ class AddressChecker_validate
     public function custom_validation_process()
     {
 
-
         global $woocommerce;
 
         if (isset($_POST['billing_address_1']) and $_POST['billing_address_1'] != '') {
-
-          $billing_address_1= sanitize_text_field($_POST['billing_address_1']);
-          if(! $billing_address_1){
-            $billing_address_1 ='';
-          }
-
-          $billing_postcode= sanitize_text_field( $_POST['billing_postcode']);
-          if(! $billing_postcode){
-            $billing_postcode ='';
-          }
-
-          $billing_city= sanitize_text_field($_POST['billing_city']);
-          if(! $billing_city){
-            $billing_city ='';
-          }
-
-          $billing_country= sanitize_text_field($_POST['billing_country']);
-
-          if(! $billing_country){
-            $billing_country ='';
-          }
             $this->validateAdres(
-                $billing_address_1,
-                $billing_postcode,
-                $billing_city,
-                $billing_country
+                $_POST['billing_address_1'],
+                $_POST['billing_postcode'],
+                $_POST['billing_city'],
+                $_POST['billing_country']
             );
         }
         if (isset($_POST['ship_to_different_address'])) {
-          $shipping_address_1= sanitize_text_field($_POST['shipping_address_1']);
-          if(! $billing_address_1){
-            $shipping_address_1 ='';
-          }
-
-          $shipping_postcode= sanitize_text_field( $_POST['shipping_postcode']);
-          if(! $shipping_postcode){
-            $shipping_postcode ='';
-          }
-
-          $shipping_city= sanitize_text_field($_POST['shipping_city']);
-          if(! $shipping_city){
-            $shipping_city ='';
-          }
-
-          $billing_country= sanitize_text_field($_POST['billing_country']);
-          if(! $billing_country){
-            $billing_country ='';
-          }
-
             $this->validateAdres(
-              $shipping_address_1,
-              $shipping_postcode,
-              $shipping_city,
-              $shipping_country
+                $_POST['shipping_address_1'],
+                $_POST['shipping_postcode'],
+                $_POST['shipping_city'],
+                $_POST['billing_country']
             );
         }
     }
@@ -133,12 +91,6 @@ class AddressChecker_validate
         $url = rawurlencode($url);
         $url = "https://maps.googleapis.com/maps/api/geocode/json?address=".$url."&key=".$api;
 
-
-        $request = wp_remote_get($url);
-        $body = wp_remote_retrieve_body($request);
-
-
-/*
         $ch = curl_init();
 // Disable SSL verification
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -150,11 +102,9 @@ class AddressChecker_validate
         $result = curl_exec($ch);
 // Closing
         curl_close($ch);
-*/
-        $dump = json_decode($body, true);
 
+        $dump = (json_decode($result, true));
         $stuff = array();
-
 
         if ($dump['status'] == 'ZERO_RESULTS') {
 
@@ -190,7 +140,7 @@ class AddressChecker_validate
             $this->scream_wrong("This can only be used for The Netherlands");
         }
 
-        $api_code = get_option('wcp_settings_api_code');
+        $api_code = get_option('address_checker_settings_api_code');
         $postcode = $postalcodeField = str_replace(' ', '', strtoupper($postalcodeField));
         $city = $cityField;
         $adress = $adresField;
